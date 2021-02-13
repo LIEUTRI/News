@@ -41,6 +41,8 @@ object-assign
  * Date: 2020-05-04T22:49Z
  */
 
+/*! jQuery v3.5.1 -ajax,-ajax/jsonp,-ajax/load,-ajax/script,-ajax/var/location,-ajax/var/nonce,-ajax/var/rquery,-ajax/xhr,-manipulation/_evalUrl,-deprecated/ajax-event-alias,-effects,-effects/Tween,-effects/animatedSelector | (c) JS Foundation and other contributors | jquery.org/license */
+
 /*! jQuery v3.5.1 | (c) JS Foundation and other contributors | jquery.org/license */
 
 /** @license React v0.20.1
