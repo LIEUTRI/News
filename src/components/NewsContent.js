@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import NewsService from "../services/NewsService";
+import Header from "./Header";
+import Footer from "./Footer";
 
 class NewsContent extends Component {
 

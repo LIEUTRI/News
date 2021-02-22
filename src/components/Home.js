@@ -3,6 +3,8 @@ import {PaginationItem, PaginationLink} from 'reactstrap';
 import NewsComponent from "./News";
 import NewsService from "../services/NewsService";
 import Paging from "./Paging";
+import Header from "./Header";
+import Footer from "./Footer";
 
 class Home extends React.Component {
     constructor(props) {
@@ -21,20 +23,21 @@ class Home extends React.Component {
         this.xuly(this.state.curPage, this.state.limit, this.state.visiblePage);
     }
 
-    xuly(curPage, limit, visiblePage){
+    xuly(curPage, limit, visiblePage) {
         NewsService.getNewses(curPage, limit).then((response) => {
             let responseData = response.data;
 
             // paging
             let totalPage = responseData.totalPage; // total page
             let items = [];
-            let offset = (curPage===1)||(totalPage===visiblePage) ? 1:(curPage-1);
-            let end = totalPage >= visiblePage ? visiblePage:totalPage;
-            console.log("Paging > totalPage="+totalPage+", visiblePage="+visiblePage+", offset="+offset+", end="+end);
+            let offset = (curPage === 1) || (totalPage === visiblePage) ? 1 : (curPage - 1);
+            let end = totalPage >= visiblePage ? visiblePage : totalPage;
+            console.log("Paging > totalPage=" + totalPage + ", visiblePage=" + visiblePage + ", offset=" + offset + ", end=" + end);
 
             for (let number = offset; number <= end; number++) {
                 items.push(
-                    <PaginationItem key={number} active={number === curPage} onClick={() => this.onChangePageNumber(number)}>
+                    <PaginationItem key={number} active={number === curPage}
+                                    onClick={() => this.onChangePageNumber(number)}>
                         <PaginationLink last>
                             {number}
                         </PaginationLink>
@@ -56,14 +59,14 @@ class Home extends React.Component {
         });
     }
 
-    onChangePageNumber(page){
-        console.log("body called, news:="+this.state.newsList.length);
+    onChangePageNumber(page) {
+        console.log("body called, news:=" + this.state.newsList.length);
 
-        if (page === 0){
-            page = this.state.curPage < this.state.totalPage ? (this.state.curPage + 1):this.state.curPage;
-        } else if (page === -1){
-            page = this.state.curPage > 1 ? (this.state.curPage - 1):this.state.curPage
-        } else if (page === -2){
+        if (page === 0) {
+            page = this.state.curPage < this.state.totalPage ? (this.state.curPage + 1) : this.state.curPage;
+        } else if (page === -1) {
+            page = this.state.curPage > 1 ? (this.state.curPage - 1) : this.state.curPage
+        } else if (page === -2) {
             page = this.state.totalPage;
         }
 
@@ -73,20 +76,20 @@ class Home extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <div className="container">
-
+                <Header/>
                 {/*Heading Row*/}
                 <div className="row align-items-center my-5">
                     <div className="col-lg-7">
-                        <img className="img-fluid rounded mb-4 mb-lg-0" src="http://placehold.it/900x400" alt=""/>
+                        <img className="img-fluid rounded mb-4 mb-lg-0" src="https://placehold.it/900x400" alt=""/>
                     </div>
                     {/*/.col-lg-8*/}
                     <div className="col-lg-5 text-center">
                         <h1 className="font-weight-light">Liễu Minh Trí</h1>
                         <p>Là một Fresher Java DEV, tôi yêu thích ngôn ngữ lập trình Java. Tôi vừa tốt nghiệp Đại học
                             trường Đại học Cần Thơ chuyên ngành Công nghệ thông tin.</p>
-                        <button className="btn btn-primary" >Tìm hiểu thêm</button>
+                        <button className="btn btn-primary">Tìm hiểu thêm</button>
                     </div>
                     {/*/.col-md-4*/}
                 </div>
@@ -99,13 +102,14 @@ class Home extends React.Component {
                     </div>
                 </div>
 
-                <NewsComponent newsList={this.state.newsList} />
+                <NewsComponent newsList={this.state.newsList}/>
 
                 <Paging items={this.state.items}
                         curPage={this.state.curPage}
                         totalPage={this.state.totalPage}
                         changePage={this.onChangePageNumber.bind(this)}/>
 
+                <Footer/>
             </div>
         );
     }
